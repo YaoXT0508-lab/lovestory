@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Countdown Timer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    #timer {
+      font-size: 36px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div id="timer">00:00:00</div>
+
+  <script>
+    // 设置目标日期时间
+    const targetDate = new Date('2023-12-31T00:00:00').getTime();
+
+    // 更新计时器显示
+    const timer = setInterval(() => {
+      const currentDate = new Date().getTime();
+      const distance = targetDate - currentDate;
+
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('timer').innerHTML = `${hours}:${minutes}:${seconds}`;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById('timer').innerHTML = 'EXPIRED';
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
